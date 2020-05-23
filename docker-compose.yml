@@ -3,7 +3,7 @@ services:
   dolar-api:
     build:
       context: .
-      dockerfile: src/main/docker/Dockerfile.native
+      dockerfile: src/main/docker/Dockerfile.jvm
     image: dolar-api
     container_name: dolar-api
     ports:

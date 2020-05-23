@@ -13,6 +13,5 @@ You can run your application in dev mode that enables live coding using:
 
 ## Packaging and running the application as docker container
 
-you can run the native executable build in a container using: `./mvnw package -Pnative -Dquarkus.native.container-build=true`.
-
-Then you can run `docker-compose up`
+You can run `docker-compose up --build` and after the generation of the image and the container is up
+you can run http://localhost:8080/swagger

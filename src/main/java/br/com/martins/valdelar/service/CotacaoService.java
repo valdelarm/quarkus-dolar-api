@@ -2,6 +2,7 @@ package br.com.martins.valdelar.service;
 
 import br.com.martins.valdelar.dto.CotacaoDto;
 import br.com.martins.valdelar.dto.RespostaApiDto;
+import br.com.martins.valdelar.exception.ApiException;
 import br.com.martins.valdelar.service.client.IConsultaCotacaoAPI;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -18,9 +19,18 @@ public class CotacaoService implements ICotacaoService {
     IConsultaCotacaoAPI consultaCotacaoAPI;
 
     @Override
-    public CotacaoDto getCotacao(final String data) {
-        RespostaApiDto resposta = consultaCotacaoAPI.getCotacao(data, JSON_FORMAT);
+    public CotacaoDto getCotacao(final String data) throws ApiException {
+        RespostaApiDto resposta;
+        try {
+            resposta = consultaCotacaoAPI.getCotacao(data, JSON_FORMAT);
+        } catch (Exception e) {
+            throw new ApiException("Error " + e.getLocalizedMessage());
+        }
 
-        return resposta.value.get(0);
+        if (resposta == null || resposta.getValue() == null || resposta.getValue().isEmpty()) {
+            throw new ApiException("Cotation not found for " + data);
+        }
+
+        return resposta.getValue().get(0);
     }
 }
