@@ -36,9 +36,9 @@ public class CotacaoResource {
             @APIResponse(responseCode = "400", description = "Erro")
     })
     @Parameter(description = "A data deve ser no formato MM-dd-aaaa como por exemplo 05-23-2020", required = true)
-    public Response getCotacao(@PathParam("data") final String data) {
+    public Response getCotacao(@PathParam("data") String data) {
         try {
-            return Response.ok(service.getCotacao("\'" + data + "\'")).build();
+            return Response.ok(service.getCotacao(data)).build();
         } catch (ApiException e) {
             log.error(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
