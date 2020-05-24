@@ -1,31 +1,28 @@
 package br.com.martins.valdelar.repository;
 
 import br.com.martins.valdelar.model.Cotacao;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoCollection;
-import org.bson.Document;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.time.LocalDate;
 
+
 @ApplicationScoped
+@Slf4j
 public class CotacaoRepository {
 
-    @Inject
-    MongoClient mongo;
-
     public Cotacao save(Cotacao cotacao) {
-        Document document = new Document()
-                .append("cotacaoCompra", cotacao.getCotacaoCompra())
-                .append("cotacaoVenda", cotacao.getCotacaoVenda())
-                .append("dataHoraCotacao", cotacao.getDataHoraCotacao())
-                .append("dataCotacao", LocalDate.now());
-        getCollection().insertOne(document);
+        log.info("Saving the quote " + cotacao);
+
+        cotacao.setDataCotacao(LocalDate.now());
+        cotacao.persist();
+
+        log.info("Quote save successfully " + cotacao);
+
         return cotacao;
     }
 
-    private MongoCollection getCollection() {
-        return mongo.getDatabase("cotacao").getCollection("cotacao");
+    public Cotacao findByDate() {
+        return null;
     }
 }

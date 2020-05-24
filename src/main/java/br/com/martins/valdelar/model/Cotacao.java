@@ -1,5 +1,7 @@
 package br.com.martins.valdelar.model;
 
+import io.quarkus.mongodb.panache.MongoEntity;
+import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -11,9 +13,8 @@ import java.time.LocalDateTime;
 @ToString
 @EqualsAndHashCode
 @Builder
-public class Cotacao {
-
-    private String id;
+@MongoEntity(collection = "cotacao")
+public class Cotacao extends PanacheMongoEntity {
 
     private LocalDateTime tempoRequisicao;
 

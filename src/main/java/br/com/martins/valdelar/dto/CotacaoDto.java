@@ -3,6 +3,7 @@ package br.com.martins.valdelar.dto;
 import br.com.martins.valdelar.model.Cotacao;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@ToString
 public class CotacaoDto {
     private Double cotacaoCompra;
     private Double cotacaoVenda;
