@@ -43,6 +43,8 @@ public class CotacaoService implements ICotacaoService {
         }
         CotacaoDto cotacaoDto = resposta.getValue().get(0);
 
+        repository.save(CotacaoDto.dtoToEntity(cotacaoDto));
+
         return cotacaoDto;
     }
 }

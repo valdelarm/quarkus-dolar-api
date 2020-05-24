@@ -7,6 +7,8 @@ import org.bson.Document;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.time.LocalDate;
+
 @ApplicationScoped
 public class CotacaoRepository {
 
@@ -17,7 +19,8 @@ public class CotacaoRepository {
         Document document = new Document()
                 .append("cotacaoCompra", cotacao.getCotacaoCompra())
                 .append("cotacaoVenda", cotacao.getCotacaoVenda())
-                .append("dataHoraCotacao", cotacao.getDataHoraCotacao());
+                .append("dataHoraCotacao", cotacao.getDataHoraCotacao())
+                .append("dataCotacao", LocalDate.now());
         getCollection().insertOne(document);
         return cotacao;
     }
