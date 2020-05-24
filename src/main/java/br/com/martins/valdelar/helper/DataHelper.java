@@ -2,6 +2,8 @@ package br.com.martins.valdelar.helper;
 
 import br.com.martins.valdelar.exception.ApiException;
 
+import static java.time.DayOfWeek.SUNDAY;
+import static java.time.DayOfWeek.SATURDAY;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,11 +24,13 @@ public class DataHelper {
     }
 
     public static String getDiaUtil(LocalDate localDate) {
-        if (localDate.getDayOfWeek() == DayOfWeek.SATURDAY)
+        DayOfWeek dayOfWeek = localDate.getDayOfWeek();
+        if (dayOfWeek == SATURDAY)
             return localDate.minusDays(1).format(FORMATTER);
-        else if (localDate.getDayOfWeek() == DayOfWeek.SUNDAY)
+        if (dayOfWeek == SUNDAY)
             return localDate.minusDays(2).format(FORMATTER);
-        else return localDate.format(FORMATTER);
+
+        return localDate.format(FORMATTER);
     }
 
     private static void validateData(LocalDate data) throws ApiException {

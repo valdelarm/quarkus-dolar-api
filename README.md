@@ -15,5 +15,5 @@ You can run your application in dev mode that enables live coding using:
 ```
 Run ./mvnw package
 ```
-then un `docker-compose up --build` and after the generation of the image and the container is up
+then run `docker-compose up --build` and after the generation of the image and the container is up
 you can run http://localhost:8080/swagger
