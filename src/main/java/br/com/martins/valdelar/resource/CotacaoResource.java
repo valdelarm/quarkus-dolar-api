@@ -3,6 +3,9 @@ package br.com.martins.valdelar.resource;
 import br.com.martins.valdelar.exception.ApiException;
 import br.com.martins.valdelar.service.ICotacaoService;
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.microprofile.metrics.MetricUnits;
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -36,6 +39,8 @@ public class CotacaoResource {
             @APIResponse(responseCode = "400", description = "Erro")
     })
     @Parameter(description = "A data deve ser no formato MM-dd-aaaa como por exemplo 05-23-2020", required = true)
+    @Timed(name = "cotacaoTimer", description = "Verifies how long it takes to get a dollar quote.", unit = MetricUnits.MILLISECONDS)
+    @Counted(name = "cotacaoCounter", description = "How many times the API was called")
     public Response getCotacao(@PathParam("data") String data) {
         try {
             return Response.ok(service.getCotacao(data)).build();
