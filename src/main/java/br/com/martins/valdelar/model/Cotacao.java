@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @EqualsAndHashCode
-@Builder
 @MongoEntity(collection = "cotacao")
 public class Cotacao extends PanacheMongoEntity {
 

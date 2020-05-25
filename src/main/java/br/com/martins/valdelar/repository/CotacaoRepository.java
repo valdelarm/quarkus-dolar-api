@@ -14,15 +14,17 @@ public class CotacaoRepository {
     public Cotacao save(Cotacao cotacao) {
         log.info("Saving the quote " + cotacao);
 
-        cotacao.setDataCotacao(LocalDate.now());
+        cotacao.setDataCotacao(cotacao.getDataHoraCotacao().toLocalDate());
         cotacao.persist();
 
-        log.info("Quote save successfully " + cotacao);
+        log.info("Quote saved successfully " + cotacao);
 
         return cotacao;
     }
 
-    public Cotacao findByDate() {
-        return null;
+    public Cotacao findByDate(LocalDate date) {
+        Cotacao cotacao = new Cotacao();
+        cotacao = cotacao.find("dataCotacao", date).firstResult();
+        return cotacao;
     }
 }

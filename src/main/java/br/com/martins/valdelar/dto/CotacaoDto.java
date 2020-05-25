@@ -19,11 +19,12 @@ public class CotacaoDto {
 
 
     public static Cotacao dtoToEntity(CotacaoDto dto) {
-       return Cotacao.builder().
-               cotacaoCompra(convertDoubleToBigDecimal(dto.getCotacaoCompra()))
-               .cotacaoVenda(convertDoubleToBigDecimal(dto.getCotacaoVenda()))
-               .dataHoraCotacao(LocalDateTime.parse(dto.getDataHoraCotacao().replace(' ', 'T')))
-               .build();
+        Cotacao cotacao = new Cotacao();
+        cotacao.setCotacaoCompra(convertDoubleToBigDecimal(dto.getCotacaoCompra()));
+        cotacao.setCotacaoVenda(convertDoubleToBigDecimal(dto.getCotacaoVenda()));
+        cotacao.setDataHoraCotacao(LocalDateTime.parse(dto.getDataHoraCotacao().replace(' ', 'T')));
+
+        return cotacao;
     }
 
     private static BigDecimal convertDoubleToBigDecimal(Double number) {

@@ -12,6 +12,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.time.LocalDate;
 
 
 @ApplicationScoped
@@ -46,5 +47,13 @@ public class CotacaoService implements ICotacaoService {
         repository.save(CotacaoDto.dtoToEntity(cotacaoDto));
 
         return cotacaoDto;
+    }
+
+    private CotacaoDto getCotacaoFromDB() {
+        return null;
+    }
+
+    private CotacaoDto getCotacaoFromApi() {
+        return null;
     }
 }
